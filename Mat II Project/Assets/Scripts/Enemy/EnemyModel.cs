@@ -24,6 +24,10 @@ public class EnemyModel : MonoBehaviour
 
     [SerializeField] private int enemyHealth = 5;
     public int EnemyHealth { get => enemyHealth; set => enemyHealth = value; }
+
+
+    [SerializeField] private int dealDamage = 2;
+    public int DealDamage { get => dealDamage; }
 }
 
 

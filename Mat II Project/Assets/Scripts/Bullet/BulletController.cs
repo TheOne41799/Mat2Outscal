@@ -31,16 +31,14 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<EnemyController>())
+        IDamageable damageableObject = collision.GetComponent<IDamageable>();
+
+        if (damageableObject != null)
         {
+            damageableObject.TakeDamage(bulletModel.BulletDamage);
+
             bulletView.DestroyBullet();
-        }
-    }
-
-
-    public int GetBulletDamage()
-    {
-        return bulletModel.BulletDamage;
+        }        
     }
 
 

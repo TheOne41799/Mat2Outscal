@@ -29,6 +29,10 @@ public class PlayerModel : MonoBehaviour
 
     [SerializeField] private float positionUpdateInterval = 0.25f;
     public float PositionUpdateInterval { get => positionUpdateInterval;}
+
+
+    [SerializeField] private int playerHealth = 5;
+    public int PlayerHealth { get => playerHealth; set => playerHealth = value; }
 }
 
 
