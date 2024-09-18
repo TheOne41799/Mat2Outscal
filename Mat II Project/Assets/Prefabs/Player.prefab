@@ -128,6 +128,7 @@ GameObject:
   - component: {fileID: 261979263915013128}
   - component: {fileID: 1022782112}
   - component: {fileID: 1022782113}
+  - component: {fileID: 222898637604523916}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -217,6 +218,23 @@ MonoBehaviour:
   gunHold: {fileID: 1405400982}
   playerRB: {fileID: 261979263915013128}
   positionUpdateInterval: 0.25
+  playerHealth: 10
+--- !u!58 &222898637604523916
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261979263915013133}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.68
 --- !u!1 &261979264033864875
 GameObject:
   m_ObjectHideFlags: 0

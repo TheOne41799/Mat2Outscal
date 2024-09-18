@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IDamageable
 {
     [SerializeField] private EnemyModel enemyModel;
     [SerializeField] private EnemyView enemyView;
@@ -10,13 +10,13 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerPositionUpdateEvent.OnPlayerPositionUpdated += UpdatePlayerPosition;
+        KeyGameEvents.OnPlayerPositionUpdated += UpdatePlayerPosition;
     }
 
 
     private void OnDisable()
     {
-        PlayerPositionUpdateEvent.OnPlayerPositionUpdated -= UpdatePlayerPosition;
+        KeyGameEvents.OnPlayerPositionUpdated -= UpdatePlayerPosition;
     }
 
 
@@ -46,16 +46,28 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        BulletController bulletController = collision.GetComponent<BulletController>();
+        IDamageable damageableObject = collision.GetComponent<IDamageable>();
 
-        if (bulletController != null)
+        if (damageableObject != null)
         {
-            enemyModel.EnemyHealth -= bulletController.GetBulletDamage();
+            damageableObject.TakeDamage(enemyModel.DealDamage);
+        }
+    }
 
-            if (enemyModel.EnemyHealth <= 0)
-            {
-                enemyView.DestroyEnemy();
-            }
+
+    public void TakeDamage(int damage)
+    {
+        enemyModel.EnemyHealth -= damage;
+
+        UpdateEnemyHealth();
+    }
+
+
+    private void UpdateEnemyHealth()
+    {
+        if (enemyModel.EnemyHealth <= 0)
+        {
+            enemyView.DestroyEnemy();
         }
     }
 }

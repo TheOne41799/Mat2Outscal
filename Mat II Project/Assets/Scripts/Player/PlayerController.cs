@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
     [SerializeField] private PlayerModel playerModel;
     [SerializeField] private PlayerView playerView;
@@ -73,8 +73,25 @@ public class PlayerController : MonoBehaviour
     {
         while (true)
         {
-            PlayerPositionUpdateEvent.BroadcastPlayerPosition(transform.position);
+            KeyGameEvents.BroadcastPlayerPosition(transform.position);
             yield return new WaitForSeconds(playerModel.PositionUpdateInterval);
+        }
+    }
+
+
+    public void TakeDamage(int damage)
+    {
+        playerModel.PlayerHealth -= damage;
+
+        UpdatePlayerHealth();
+    }
+
+
+    private void UpdatePlayerHealth()
+    {
+        if (playerModel.PlayerHealth <= 0)
+        {
+            playerView.DestroyPlayer();
         }
     }
 }

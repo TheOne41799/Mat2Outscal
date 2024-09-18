@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 7187435926494165283}
   - component: {fileID: 7187435926494165286}
   - component: {fileID: 2579960671903892519}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,9 +516,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19e9d556f1895a4fb0803250ccdd20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 2
   enemyRB: {fileID: 7187435926494165286}
   rotationSpeed: 10
+  enemyHealth: 5
+  dealDamage: 1
 --- !u!114 &7187435926494165280
 MonoBehaviour:
   m_ObjectHideFlags: 0

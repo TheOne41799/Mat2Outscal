@@ -17,6 +17,12 @@ public class PlayerView : MonoBehaviour
     {
         playerModel.PlayerRB.rotation = angle;
     }
+
+
+    public void DestroyPlayer()
+    {
+        Destroy(this.gameObject);
+    }
 }
 
 
