@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,15 @@ public class PlayerModel : MonoBehaviour
 
     [SerializeField] private Rigidbody2D playerRB;
     public Rigidbody2D PlayerRB { get => playerRB; }
+
+
+    [SerializeField] private float positionUpdateInterval = 0.25f;
+    public float PositionUpdateInterval { get => positionUpdateInterval;}
 }
+
+
+
+
 
 
 

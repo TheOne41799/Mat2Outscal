@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 0.1
-  bulletVelocity: 100
+  bulletVelocity: 50
   muzzle: {fileID: 1343506423}
   bulletPrefab: {fileID: 1415822732650240325, guid: 47c5b05cb9afdda49954cac89c7cea4e, type: 3}
 --- !u!114 &5875279805806334980

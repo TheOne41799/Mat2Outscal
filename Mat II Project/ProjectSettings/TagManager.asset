@@ -47,7 +47,7 @@ TagManager:
   - name: Player
     uniqueID: 1521861035
     locked: 0
-  - name: Gaurd
+  - name: Enemy
     uniqueID: 285382819
     locked: 0
   - name: Obstacle

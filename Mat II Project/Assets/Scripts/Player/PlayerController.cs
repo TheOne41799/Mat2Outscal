@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         EquipGun();
+        StartCoroutine(BroadcastPlayerPositionCoroutine());
     }
 
 
@@ -65,6 +66,16 @@ public class PlayerController : MonoBehaviour
         gunObject.transform.parent = playerModel.GunHold;
 
         playerModel.EquippedGunController = gunObject.GetComponent<GunController>();
+    }
+
+
+    private IEnumerator BroadcastPlayerPositionCoroutine()
+    {
+        while (true)
+        {
+            PlayerPositionUpdateEvent.BroadcastPlayerPosition(transform.position);
+            yield return new WaitForSeconds(playerModel.PositionUpdateInterval);
+        }
     }
 }
 

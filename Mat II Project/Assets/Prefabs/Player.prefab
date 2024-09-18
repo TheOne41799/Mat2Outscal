@@ -216,6 +216,7 @@ MonoBehaviour:
   startingGunPrefab: {fileID: 2231043749843307341, guid: 5647d527b3c557c499fe87d50e5b46c9, type: 3}
   gunHold: {fileID: 1405400982}
   playerRB: {fileID: 261979263915013128}
+  positionUpdateInterval: 0.25
 --- !u!1 &261979264033864875
 GameObject:
   m_ObjectHideFlags: 0
