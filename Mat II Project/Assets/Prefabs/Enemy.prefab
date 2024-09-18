@@ -519,7 +519,7 @@ MonoBehaviour:
   moveSpeed: 2
   enemyRB: {fileID: 7187435926494165286}
   rotationSpeed: 10
-  enemyHealth: 5
+  enemyHealth: 1
   dealDamage: 1
 --- !u!114 &7187435926494165280
 MonoBehaviour:
