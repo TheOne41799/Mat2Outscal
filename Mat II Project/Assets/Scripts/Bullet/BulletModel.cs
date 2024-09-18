@@ -10,6 +10,10 @@ public class BulletModel : MonoBehaviour
 
     private Vector2 direction;
     public Vector2 Direction { get => direction; set => direction = value.normalized; }
+
+
+    [SerializeField] private int bulletDamage = 1;
+    public int BulletDamage { get => bulletDamage; }
 }
 
 

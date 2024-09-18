@@ -11,6 +11,12 @@ public class BulletView : MonoBehaviour
     {
         transform.Translate(bulletModel.BulletSpeed * Time.deltaTime * Vector2.right);
     }
+
+
+    public void DestroyBullet()
+    {
+        Destroy(this.gameObject);
+    }
 }
 
 
