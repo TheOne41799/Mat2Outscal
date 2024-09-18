@@ -4,39 +4,67 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D playerRB;
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private PlayerModel playerModel;
+    [SerializeField] private PlayerView playerView;
+
+
+    private void Start()
+    {
+        EquipGun();
+    }
 
 
     private void Update()
     {
-        RotatePlayerToMousePosition();
+        HandlePlayerRotation();
+        HandlePlayerShooting();
     }
 
 
     private void FixedUpdate()
     {
-        MovePlayer();
+        HandlePlayerMovement();
     }
 
 
-    private void MovePlayer()
+    private void HandlePlayerMovement()
     {
         Vector2 movementInput = InputManager.Instance.GetMovementInput();
-        Vector2 velocity = movementInput.normalized * moveSpeed;
+        Vector2 velocity = movementInput.normalized * playerModel.MoveSpeed;
 
-        playerRB.velocity = velocity;
+        playerView.SetVelocity(velocity);
     }
 
 
-    private void RotatePlayerToMousePosition()
+    private void HandlePlayerRotation()
     {
         Vector3 mousePosition = InputManager.Instance.GetMousePosition();
         Vector3 direction = (mousePosition - transform.position).normalized;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        playerRB.rotation = angle;
+        playerView.SetRotation(angle);
+    }
+
+
+    private void HandlePlayerShooting()
+    {
+        if (playerModel.EquippedGunController != null && InputManager.Instance.IsLeftMouseButtonPressed())
+        {
+            playerModel.EquippedGunController.Shoot();
+        }
+    }
+
+
+    private void EquipGun()
+    {
+        GameObject gunObject = Instantiate(playerModel.StartingGunPrefab, 
+                                           playerModel.GunHold.position, 
+                                           playerModel.GunHold.rotation);
+
+        gunObject.transform.parent = playerModel.GunHold;
+
+        playerModel.EquippedGunController = gunObject.GetComponent<GunController>();
     }
 }
 

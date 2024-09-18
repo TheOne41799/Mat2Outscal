@@ -36,6 +36,12 @@ public class InputManager : MonoBehaviour
     {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
+
+
+    public bool IsLeftMouseButtonPressed()
+    {
+        return Input.GetMouseButton(0);
+    }
 }
 
 
