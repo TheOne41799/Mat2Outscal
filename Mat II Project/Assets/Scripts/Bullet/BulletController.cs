@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class BulletController : MonoBehaviour
 {
     [SerializeField] private BulletModel bulletModel;
@@ -40,6 +41,12 @@ public class BulletController : MonoBehaviour
     public int GetBulletDamage()
     {
         return bulletModel.BulletDamage;
+    }
+
+
+    public int GetBulletDestroyTime()
+    {
+        return bulletModel.BulletDestroyTime;
     }
 }
 

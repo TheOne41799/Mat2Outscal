@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GunModel : MonoBehaviour
 {
     [SerializeField] private float fireRate = 0.1f;
