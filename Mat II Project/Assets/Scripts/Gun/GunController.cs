@@ -28,7 +28,9 @@ public class GunController : MonoBehaviour
         gunModel.BulletController = bulletObject.GetComponent<BulletController>();
         gunModel.BulletDirection = gunModel.Muzzle.right;
 
-        Destroy(bulletObject, 4);
+        int destroyTime = gunModel.BulletController.GetBulletDestroyTime();
+
+        Destroy(bulletObject, destroyTime);
     }
 
 

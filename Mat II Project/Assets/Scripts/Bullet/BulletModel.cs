@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BulletModel : MonoBehaviour
 {
     [SerializeField] private float bulletSpeed = 5f;
@@ -14,6 +15,10 @@ public class BulletModel : MonoBehaviour
 
     [SerializeField] private int bulletDamage = 1;
     public int BulletDamage { get => bulletDamage; }
+
+
+    [SerializeField] private int bulletDestroyTime = 4;
+    public int BulletDestroyTime { get => bulletDestroyTime; }
 }
 
 
