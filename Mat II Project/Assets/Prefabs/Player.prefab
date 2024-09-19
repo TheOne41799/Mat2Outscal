@@ -334,7 +334,7 @@ MonoBehaviour:
   gunHold: {fileID: 1405400982}
   playerRB: {fileID: 261979263915013128}
   positionUpdateInterval: 0.25
-  playerHealth: 10
+  playerHealth: 1
   playerLight: {fileID: 1929822881}
   initialLightRadius: 0
   criticalLightRadius: 1.5
@@ -345,6 +345,7 @@ MonoBehaviour:
     m_Bits: 64
   playerSpriteRenderer: {fileID: 261979264042658816}
   playerStunnedTime: 0.15
+  deathParticleEffect: {fileID: 1015499579574242664, guid: d3154e11c7fbded4d91e9a4fc33dea7a, type: 3}
 --- !u!58 &222898637604523916
 CircleCollider2D:
   m_ObjectHideFlags: 0

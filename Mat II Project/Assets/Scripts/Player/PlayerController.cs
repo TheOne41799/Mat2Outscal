@@ -99,6 +99,9 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (playerModel.PlayerHealth <= 0)
         {
             KeyGameEvents.BroadcastPlayerDeath();
+
+            playerView.SpawnHitParticle();
+
             playerView.DestroyPlayer();
         }
     }

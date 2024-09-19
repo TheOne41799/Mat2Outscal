@@ -25,10 +25,23 @@ public class EnemyView : MonoBehaviour
     }
 
 
+    private void OnDestroy()
+    {
+        SpawnHitParticle();
+    }
+
+
     public IEnumerator UpdatePlayerSpriteColor()
     {
         enemyModel.EnemySpriteRenderer.color = Color.red;
         yield return new WaitForSeconds(enemyModel.EnemyStunnedTime);
         enemyModel.EnemySpriteRenderer.color = enemyModel.OriginalColor;
+    }
+
+
+    public void SpawnHitParticle()
+    {
+        ParticleSystem particle = Instantiate(enemyModel.DeathParticleEffect, transform.position, transform.rotation);
+        particle.Play();
     }
 }

@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
+  - Obstacle
   - 
   - 
   - 
@@ -58,4 +58,7 @@ TagManager:
     locked: 0
   - name: Bullet
     uniqueID: 718596153
+    locked: 0
+  - name: ParticleEffects
+    uniqueID: 3254554211
     locked: 0

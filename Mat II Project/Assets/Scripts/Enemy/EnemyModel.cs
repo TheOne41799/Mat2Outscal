@@ -39,6 +39,10 @@ public class EnemyModel : MonoBehaviour
 
     [SerializeField] private float enemyStunnedTime = 0.1f;
     public float EnemyStunnedTime { get => enemyStunnedTime; }
+
+
+    [SerializeField] private ParticleSystem deathParticleEffect;
+    public ParticleSystem DeathParticleEffect { get => deathParticleEffect; set => deathParticleEffect = value; }
 }
 
 

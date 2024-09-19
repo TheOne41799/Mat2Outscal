@@ -523,6 +523,7 @@ MonoBehaviour:
   dealDamage: 1
   enemySpriteRenderer: {fileID: 7187435924453191681}
   enemyStunnedTime: 0.1
+  deathParticleEffect: {fileID: 1015499579574242664, guid: 74a19c44f47d9f54a907ac455c2591c8, type: 3}
 --- !u!114 &7187435926494165280
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,6 +26,12 @@ public class EnemyController : MonoBehaviour, IDamageable
     }
 
 
+    private void Start()
+    {
+        enemyModel.OriginalColor = enemyModel.EnemySpriteRenderer.color;
+    }
+
+
     private void Update()
     {
         MoveTowardsPlayer();
@@ -76,6 +82,8 @@ public class EnemyController : MonoBehaviour, IDamageable
 
         if (enemyModel.EnemyHealth <= 0)
         {
+            enemyView.SpawnHitParticle();
+
             enemyView.DestroyEnemy();
         }
     }

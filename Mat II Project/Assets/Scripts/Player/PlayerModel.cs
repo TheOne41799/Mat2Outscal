@@ -70,6 +70,10 @@ public class PlayerModel : MonoBehaviour
 
     [SerializeField] private float playerStunnedTime = 0.15f;
     public float PlayerStunnedTime { get => playerStunnedTime; }
+
+
+    [SerializeField] private ParticleSystem deathParticleEffect;
+    public ParticleSystem DeathParticleEffect { get => deathParticleEffect; set => deathParticleEffect = value; }
 }
 
 
