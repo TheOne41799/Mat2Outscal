@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         EquipGun();
         StartCoroutine(BroadcastPlayerPositionCoroutine());
+        playerModel.InitialLightRadius = playerModel.PlayerLight.pointLightOuterRadius;
     }
 
 
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         HandlePlayerRotation();
         HandlePlayerShooting();
+        HandleEnemyDetection();
     }
 
 
@@ -91,8 +94,19 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         if (playerModel.PlayerHealth <= 0)
         {
-            playerView.DestroyPlayer();
+            //KeyGameEvents.BroadcastPlayerDeath();
+            playerView.DestroyPlayer();            
         }
+    }
+
+
+    private void HandleEnemyDetection()
+    {
+        Collider2D[] enemiesInRadius = Physics2D.OverlapCircleAll(transform.position, 
+                                                                  playerModel.PlayerLight.pointLightOuterRadius, 
+                                                                  playerModel.EnemyLayerMask);
+
+        playerView.UpdateLightRadius(enemiesInRadius.Length);
     }
 }
 

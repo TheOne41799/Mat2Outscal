@@ -11,12 +11,14 @@ public class EnemyController : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         KeyGameEvents.OnPlayerPositionUpdated += UpdatePlayerPosition;
+        //KeyGameEvents.OnPlayerDeath += HandlePlayerDeath;
     }
 
 
     private void OnDisable()
     {
         KeyGameEvents.OnPlayerPositionUpdated -= UpdatePlayerPosition;
+        //KeyGameEvents.OnPlayerDeath -= HandlePlayerDeath;
     }
 
 
@@ -51,6 +53,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         if (damageableObject != null)
         {
             damageableObject.TakeDamage(enemyModel.DealDamage);
+            enemyView.DestroyEnemy();
         }
     }
 

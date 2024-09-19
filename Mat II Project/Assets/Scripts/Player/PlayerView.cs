@@ -23,6 +23,29 @@ public class PlayerView : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+
+
+    public void UpdateLightRadius(int enemyCountWithinRadius)
+    {
+        if (enemyCountWithinRadius > 0)
+        {
+            playerModel.PlayerLight.pointLightOuterRadius -= playerModel.LightRadiusDecreaseRate
+                                                             * Time.deltaTime;
+
+            if (playerModel.PlayerLight.pointLightOuterRadius <= playerModel.CriticalLightRadius)
+            {
+                DestroyPlayer();
+            }
+        }
+        else
+        {
+            if (playerModel.PlayerLight.pointLightOuterRadius >= playerModel.InitialLightRadius) return;
+
+            playerModel.PlayerLight.pointLightOuterRadius += playerModel.LightRadiusIncreaseRate * Time.deltaTime;
+            playerModel.PlayerLight.pointLightOuterRadius = Mathf.Min(playerModel.PlayerLight.pointLightOuterRadius,
+                                                                      playerModel.InitialLightRadius);
+        }
+    }
 }
 
 
