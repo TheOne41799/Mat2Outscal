@@ -27,6 +27,18 @@ public class EnemyModel : MonoBehaviour
 
     [SerializeField] private int dealDamage = 2;
     public int DealDamage { get => dealDamage; }
+
+
+    [SerializeField] private SpriteRenderer enemySpriteRenderer;
+    public SpriteRenderer EnemySpriteRenderer { get => enemySpriteRenderer; set => enemySpriteRenderer = value; }
+
+
+    private Color originalColor;
+    public Color OriginalColor { get => originalColor; set => originalColor = value; }
+
+
+    [SerializeField] private float enemyStunnedTime = 0.1f;
+    public float EnemyStunnedTime { get => enemyStunnedTime; }
 }
 
 

@@ -519,8 +519,10 @@ MonoBehaviour:
   moveSpeed: 3
   enemyRB: {fileID: 7187435926494165286}
   rotationSpeed: 10
-  enemyHealth: 4
+  enemyHealth: 1
   dealDamage: 1
+  enemySpriteRenderer: {fileID: 7187435924453191681}
+  enemyStunnedTime: 0.1
 --- !u!114 &7187435926494165280
 MonoBehaviour:
   m_ObjectHideFlags: 0

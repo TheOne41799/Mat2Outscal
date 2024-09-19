@@ -34,6 +34,7 @@ public class PlayerView : MonoBehaviour
 
             if (playerModel.PlayerLight.pointLightOuterRadius <= playerModel.CriticalLightRadius)
             {
+                KeyGameEvents.BroadcastPlayerDeath();
                 DestroyPlayer();
             }
         }
@@ -45,6 +46,14 @@ public class PlayerView : MonoBehaviour
             playerModel.PlayerLight.pointLightOuterRadius = Mathf.Min(playerModel.PlayerLight.pointLightOuterRadius,
                                                                       playerModel.InitialLightRadius);
         }
+    }
+
+
+    public IEnumerator UpdatePlayerSpriteColor()
+    {
+        playerModel.PlayerSpriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(playerModel.PlayerStunnedTime);
+        playerModel.PlayerSpriteRenderer.color = playerModel.OriginalColor;
     }
 }
 

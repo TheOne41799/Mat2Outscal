@@ -57,7 +57,19 @@ public class PlayerModel : MonoBehaviour
 
 
     [SerializeField] private LayerMask enemyLayerMask;
-    public LayerMask EnemyLayerMask { get => enemyLayerMask; }    
+    public LayerMask EnemyLayerMask { get => enemyLayerMask; }
+
+
+    [SerializeField] private SpriteRenderer playerSpriteRenderer;
+    public SpriteRenderer PlayerSpriteRenderer { get => playerSpriteRenderer; set => playerSpriteRenderer = value; }
+
+
+    private Color originalColor;
+    public Color OriginalColor { get => originalColor; set => originalColor = value; }
+
+
+    [SerializeField] private float playerStunnedTime = 0.15f;
+    public float PlayerStunnedTime { get => playerStunnedTime; }
 }
 
 

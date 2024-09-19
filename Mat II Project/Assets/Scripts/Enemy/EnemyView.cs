@@ -23,4 +23,12 @@ public class EnemyView : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+
+
+    public IEnumerator UpdatePlayerSpriteColor()
+    {
+        enemyModel.EnemySpriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(enemyModel.EnemyStunnedTime);
+        enemyModel.EnemySpriteRenderer.color = enemyModel.OriginalColor;
+    }
 }

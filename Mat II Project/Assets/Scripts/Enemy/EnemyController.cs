@@ -66,6 +66,14 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     private void UpdateEnemyHealth()
     {
+        StartCoroutine(UpdateHealthAndDestroyIfNeeded());
+    }
+
+
+    private IEnumerator UpdateHealthAndDestroyIfNeeded()
+    {
+        yield return StartCoroutine(enemyView.UpdatePlayerSpriteColor());
+
         if (enemyModel.EnemyHealth <= 0)
         {
             enemyView.DestroyEnemy();

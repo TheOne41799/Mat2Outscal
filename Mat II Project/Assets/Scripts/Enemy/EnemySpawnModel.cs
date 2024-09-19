@@ -16,8 +16,8 @@ public class EnemySpawnModel : MonoBehaviour
     public float WaitTimeToKillLeftOverEnemies {  get => waitTimeToKillLeftOverEnemies; }
 
 
-    private Vector3 playerPosition;
-    public Vector3 PlayerPosition { get => playerPosition; set => playerPosition = value; }
+    private Vector3 spawnerPosition;
+    public Vector3 SpawnerPosition { get => spawnerPosition; set => spawnerPosition = value; }
 
 
     [SerializeField] private float ellipseRadiusX = 10f;
@@ -46,6 +46,10 @@ public class EnemySpawnModel : MonoBehaviour
 
     private Coroutine enemySpawnCoroutine;
     public Coroutine EnemySpawnCoroutine { get => enemySpawnCoroutine; set => enemySpawnCoroutine = value; }
+
+
+    private bool canSpawnEnemies = true;
+    public bool CanSpawnEnemies { get => canSpawnEnemies; set => canSpawnEnemies = value;}
 }
 
 

@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         EquipGun();
         StartCoroutine(BroadcastPlayerPositionCoroutine());
         playerModel.InitialLightRadius = playerModel.PlayerLight.pointLightOuterRadius;
+        playerModel.OriginalColor = playerModel.PlayerSpriteRenderer.color;
     }
 
 
@@ -93,10 +94,12 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void UpdatePlayerHealth()
     {
+        StartCoroutine(playerView.UpdatePlayerSpriteColor());
+
         if (playerModel.PlayerHealth <= 0)
         {
             KeyGameEvents.BroadcastPlayerDeath();
-            playerView.DestroyPlayer();            
+            playerView.DestroyPlayer();
         }
     }
 
