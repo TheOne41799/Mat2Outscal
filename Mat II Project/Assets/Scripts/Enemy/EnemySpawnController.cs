@@ -7,9 +7,29 @@ public class EnemySpawnController : MonoBehaviour
     [SerializeField] private EnemySpawnModel enemySpawnModel;
 
 
+    private void OnEnable()
+    {
+        KeyGameEvents.OnPlayerPositionUpdated += UpdateSpawnerPosition;
+        KeyGameEvents.OnPlayerDeath += HandlePlayerDeath;
+    }
+
+
+    private void OnDisable()
+    {
+        KeyGameEvents.OnPlayerPositionUpdated -= UpdateSpawnerPosition;
+        KeyGameEvents.OnPlayerDeath -= HandlePlayerDeath;
+    }
+
+
+    private void UpdateSpawnerPosition(Vector3 newPlayerPosition)
+    {
+        enemySpawnModel.PlayerPosition = newPlayerPosition;
+    }
+
+
     private void Start()
     {
-        StartCoroutine(SpawnEnemies());
+        enemySpawnModel.EnemySpawnCoroutine = StartCoroutine(SpawnEnemies());
     }
 
 
@@ -18,7 +38,10 @@ public class EnemySpawnController : MonoBehaviour
         while (true)
         {
             Vector2 spawnPosition = GetRandomPointOnEllipse();
-            Instantiate(enemySpawnModel.Enemy, spawnPosition, Quaternion.identity);
+
+            GameObject thisEnemy = Instantiate(enemySpawnModel.Enemy, spawnPosition, Quaternion.identity);
+
+            enemySpawnModel.Enemies.Add(thisEnemy);
             
             enemySpawnModel.EnemySpawnInterval = Mathf.Clamp(
                                     enemySpawnModel.EnemySpawnInterval - enemySpawnModel.DecreaseSpawnIntervalBy,
@@ -34,8 +57,8 @@ public class EnemySpawnController : MonoBehaviour
     {
         float angle = Random.Range(0, 2f * Mathf.PI);
 
-        float x = enemySpawnModel.EllipseRadiusX * Mathf.Cos(angle);
-        float y = enemySpawnModel.EllipseRadiusY * Mathf.Sin(angle);
+        float x = enemySpawnModel.PlayerPosition.x + enemySpawnModel.EllipseRadiusX * Mathf.Cos(angle);
+        float y = enemySpawnModel.PlayerPosition.y + enemySpawnModel.EllipseRadiusY * Mathf.Sin(angle);
 
         return new Vector2(x, y);
     }
@@ -67,8 +90,40 @@ public class EnemySpawnController : MonoBehaviour
     }
 
 
-    public void StopSpawningEnemies()
+    private void HandlePlayerDeath()
     {
-        StopCoroutine(SpawnEnemies());
+        if(enemySpawnModel.EnemySpawnCoroutine != null)
+        {
+            StopCoroutine(enemySpawnModel.EnemySpawnCoroutine);
+            enemySpawnModel.EnemySpawnCoroutine = null;
+
+            DestroyEnemies();
+        }
+    }
+
+
+    private void DestroyEnemies()
+    {
+        foreach (var enemy in enemySpawnModel.Enemies)
+        {
+            if (enemy != null)
+            {
+                Destroy(enemy, enemySpawnModel.WaitTimeToKillLeftOverEnemies);
+            }
+        }
+
+        enemySpawnModel.Enemies.Clear();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+

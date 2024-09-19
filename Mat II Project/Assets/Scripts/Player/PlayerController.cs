@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         while (true)
         {
             KeyGameEvents.BroadcastPlayerPosition(transform.position);
+
             yield return new WaitForSeconds(playerModel.PositionUpdateInterval);
         }
     }
@@ -94,7 +95,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         if (playerModel.PlayerHealth <= 0)
         {
-            //KeyGameEvents.BroadcastPlayerDeath();
+            KeyGameEvents.BroadcastPlayerDeath();
             playerView.DestroyPlayer();            
         }
     }
