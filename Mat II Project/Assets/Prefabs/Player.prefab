@@ -112,7 +112,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0
-  m_Color: {r: 1, g: 0, b: 0.07291317, a: 1}
+  m_Color: {r: 0.31078678, g: 0.6792453, b: 0.50506514, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1.47
   m_LightVolumeIntensityEnabled: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 3
+  m_PointLightOuterRadius: 10
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -335,6 +335,14 @@ MonoBehaviour:
   playerRB: {fileID: 261979263915013128}
   positionUpdateInterval: 0.25
   playerHealth: 10
+  playerLight: {fileID: 1929822881}
+  initialLightRadius: 0
+  criticalLightRadius: 1.5
+  lightRadiusDecreaseRate: 1
+  lightRadiusIncreaseRate: 0.5
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!58 &222898637604523916
 CircleCollider2D:
   m_ObjectHideFlags: 0

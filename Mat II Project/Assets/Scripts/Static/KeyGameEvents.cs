@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public static class KeyGameEvents
 {
     public static event Action<Vector3> OnPlayerPositionUpdated;

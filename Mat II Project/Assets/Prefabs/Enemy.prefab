@@ -516,10 +516,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19e9d556f1895a4fb0803250ccdd20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 3
   enemyRB: {fileID: 7187435926494165286}
   rotationSpeed: 10
-  enemyHealth: 1
+  enemyHealth: 4
   dealDamage: 1
 --- !u!114 &7187435926494165280
 MonoBehaviour:
