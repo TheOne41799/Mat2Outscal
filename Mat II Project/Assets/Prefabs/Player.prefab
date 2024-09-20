@@ -217,7 +217,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1521861035
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -334,7 +334,7 @@ MonoBehaviour:
   gunHold: {fileID: 1405400982}
   playerRB: {fileID: 261979263915013128}
   positionUpdateInterval: 0.25
-  playerHealth: 1
+  playerHealth: 10
   playerLight: {fileID: 1929822881}
   initialLightRadius: 0
   criticalLightRadius: 1.5
@@ -344,7 +344,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   playerSpriteRenderer: {fileID: 261979264042658816}
-  playerStunnedTime: 0.15
+  playerStunnedTime: 1
   deathParticleEffect: {fileID: 1015499579574242664, guid: d3154e11c7fbded4d91e9a4fc33dea7a, type: 3}
 --- !u!58 &222898637604523916
 CircleCollider2D:
@@ -467,7 +467,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1521861035
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
   m_Color: {r: 0.9622642, g: 0.78626174, b: 0.013616921, a: 1}
@@ -551,7 +551,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1521861035
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

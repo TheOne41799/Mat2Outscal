@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GunController : MonoBehaviour
 {
     [SerializeField] private GunModel gunModel;
@@ -37,6 +38,61 @@ public class GunController : MonoBehaviour
     private void ExecuteShoot()
     {
         gunView.Shoot();
+
+        Vector2 gunDirection = GetDirectionToMouse();
+        EjectShell(gunDirection);
+    }
+
+
+    private Vector2 GetDirectionToMouse()
+    {
+        Vector3 mousePosition = InputManager.Instance.GetMousePosition();
+        mousePosition.z = 0;
+
+        Vector2 gunPosition = transform.position;
+        Vector2 directionToMouse = (mousePosition - (Vector3)gunPosition).normalized;
+
+        return directionToMouse;
+    }
+
+
+    private void EjectShell(Vector2 gunDirection)
+    {
+        GameObject shell = Instantiate(gunModel.ShellPrefab,
+                                       gunModel.EjectionPoint.position,
+                                       gunModel.EjectionPoint.rotation);
+
+        Rigidbody2D rb = shell.GetComponent<Rigidbody2D>();
+
+        Vector2 ejectionDirection = new Vector2(-gunDirection.y, gunDirection.x).normalized;
+        float randomAngle = Random.Range(-gunModel.RandomAngleVariance, gunModel.RandomAngleVariance);
+        ejectionDirection = RotateVector(ejectionDirection, randomAngle);
+
+        Vector2 upwardForce = new Vector2(-gunDirection.y, gunDirection.x).normalized
+                              * Random.Range(gunModel.MinUpwardForceShellEjection, 
+                                             gunModel.MaxUpwardForceShellEjection);
+
+        Vector2 finalEjectionDirection = ejectionDirection + upwardForce;
+        float randomForce = Random.Range(gunModel.EjectionForce - gunModel.RandomForceVariance,
+                                         gunModel.EjectionForce + gunModel.RandomForceVariance);
+
+        rb.AddForce(finalEjectionDirection * randomForce, ForceMode2D.Impulse);
+
+        float randomTorque = Random.Range(gunModel.MinShellRotationSpeed, gunModel.MaxShellRotationSpeed);
+        rb.AddTorque(randomTorque);
+    }
+
+
+    private Vector2 RotateVector(Vector2 vec, float angleDegrees)
+    {
+        float angleRad = angleDegrees * Mathf.Deg2Rad;
+        float cosAngle = Mathf.Cos(angleRad);
+        float sinAngle = Mathf.Sin(angleRad);
+
+        return new Vector2(
+            vec.x * cosAngle - vec.y * sinAngle,
+            vec.x * sinAngle + vec.y * cosAngle
+        );
     }
 }
 

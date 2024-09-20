@@ -68,12 +68,18 @@ public class PlayerModel : MonoBehaviour
     public Color OriginalColor { get => originalColor; set => originalColor = value; }
 
 
-    [SerializeField] private float playerStunnedTime = 0.15f;
+    [SerializeField] private float playerStunnedTime = 1f;
     public float PlayerStunnedTime { get => playerStunnedTime; }
 
 
     [SerializeField] private ParticleSystem deathParticleEffect;
     public ParticleSystem DeathParticleEffect { get => deathParticleEffect; set => deathParticleEffect = value; }
+
+
+    private Coroutine updatePlayerSpriteColorCoroutine;
+    public Coroutine UpdatePlayerSpriteColorCoroutine { 
+                        get => updatePlayerSpriteColorCoroutine;
+                        set => updatePlayerSpriteColorCoroutine = value;}
 }
 
 

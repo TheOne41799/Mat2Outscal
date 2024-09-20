@@ -94,7 +94,12 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void UpdatePlayerHealth()
     {
-        StartCoroutine(playerView.UpdatePlayerSpriteColor());
+        if(playerModel.UpdatePlayerSpriteColorCoroutine != null)
+        {
+            StopCoroutine(playerModel.UpdatePlayerSpriteColorCoroutine);
+        }
+
+        playerModel.UpdatePlayerSpriteColorCoroutine = StartCoroutine(playerView.UpdatePlayerSpriteColor());
 
         if (playerModel.PlayerHealth <= 0)
         {

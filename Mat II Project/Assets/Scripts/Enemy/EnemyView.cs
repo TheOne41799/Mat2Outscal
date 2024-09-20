@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class EnemyView : MonoBehaviour
@@ -27,7 +28,19 @@ public class EnemyView : MonoBehaviour
 
     private void OnDestroy()
     {
-        SpawnHitParticle();
+        //SpawnHitParticle();
+
+#if UNITY_EDITOR
+        if (!EditorApplication.isPlayingOrWillChangePlaymode)
+        {
+            return;
+        }
+#endif
+
+        if (Application.isPlaying)
+        {
+            SpawnHitParticle();
+        }
     }
 
 
@@ -43,5 +56,8 @@ public class EnemyView : MonoBehaviour
     {
         ParticleSystem particle = Instantiate(enemyModel.DeathParticleEffect, transform.position, transform.rotation);
         particle.Play();
+
+
+        Destroy(particle.gameObject, particle.main.duration + particle.main.startLifetime.constantMax);
     }
 }

@@ -9,7 +9,7 @@ public class GunModel : MonoBehaviour
     public float FireRate { get => fireRate; set => fireRate = value; }
 
 
-    [SerializeField] private float bulletVelocity = 100f;
+    [SerializeField] private float bulletVelocity = 50f;
     public float BulletVelocity { get => bulletVelocity; set => bulletVelocity = value; }
 
 
@@ -31,7 +31,46 @@ public class GunModel : MonoBehaviour
 
     private BulletController bulletController;
     public BulletController BulletController { get => bulletController; set => bulletController = value; }
+
+
+    [SerializeField] private GameObject shellPrefab;
+    public GameObject ShellPrefab { get => shellPrefab; }
+
+
+    [SerializeField] private Transform ejectionPoint;
+    public Transform EjectionPoint { get => ejectionPoint; }
+
+
+    [SerializeField] private float ejectionForce = 3f;
+    public float EjectionForce { get => ejectionForce; }
+
+
+    [SerializeField] private float randomForceVariance = 1f;
+    public float RandomForceVariance { get => randomForceVariance; }
+
+
+    [SerializeField] private float randomAngleVariance = 70f;
+    public float RandomAngleVariance { get => randomAngleVariance; }
+
+
+    [SerializeField] private float minUpwardForceShellEjection = 0.5f;
+    public float MinUpwardForceShellEjection {  get => minUpwardForceShellEjection;}
+
+
+    [SerializeField] private float maxUpwardForceShellEjection = 3f;
+    public float MaxUpwardForceShellEjection { get => maxUpwardForceShellEjection; }
+
+
+    [SerializeField] private float minShellRotationSpeed = -60f;
+    public float MinShellRotationSpeed { get => minShellRotationSpeed; }
+
+
+    [SerializeField] private float maxShellRotationSpeed = 60f;
+    public float MaxShellRotationSpeed { get => maxShellRotationSpeed; }
 }
+
+
+
 
 
 
