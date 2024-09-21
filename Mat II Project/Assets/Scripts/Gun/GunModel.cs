@@ -67,6 +67,18 @@ public class GunModel : MonoBehaviour
 
     [SerializeField] private float maxShellRotationSpeed = 60f;
     public float MaxShellRotationSpeed { get => maxShellRotationSpeed; }
+
+
+    [SerializeField] private GameObject muzzleFlashSprites;
+    public GameObject MuzzleFlashSprites { get => muzzleFlashSprites; set { muzzleFlashSprites = value; } }
+
+
+    [SerializeField] private GameObject muzzleFlashLight;
+    public GameObject MuzzleFlashLight {  get => muzzleFlashLight; set { muzzleFlashLight = value; } }
+
+
+    [SerializeField] private float muzzleFlashTime = 0.05f;
+    public float MuzzleFlashTime { get => muzzleFlashTime; }
 }
 
 

@@ -62,3 +62,6 @@ TagManager:
   - name: ParticleEffects
     uniqueID: 3254554211
     locked: 0
+  - name: MuzzleFlash
+    uniqueID: 2734129247
+    locked: 0
