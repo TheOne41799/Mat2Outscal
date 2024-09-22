@@ -742,7 +742,7 @@ MonoBehaviour:
   muzzleFlashTime: 0.05
   recoilAmount: 0.1
   recoilRecoverySpeed: 0.1
-  maxAmmo: 120
+  maxAmmo: 12000
   currentAmmo: 0
   magazineSize: 30
   reloadTime: 2
