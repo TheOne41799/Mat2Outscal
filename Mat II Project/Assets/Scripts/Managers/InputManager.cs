@@ -42,6 +42,24 @@ public class InputManager : MonoBehaviour
     {
         return Input.GetMouseButton(0);
     }
+
+
+    public bool IsLeftMouseButtonDown()
+    {
+        return Input.GetMouseButtonDown(0);
+    }
+
+
+    public bool IsRightMouseButtonDown()
+    {
+        return Input.GetMouseButtonDown(1);
+    }
+
+
+    public bool IsRkeyPressed()
+    {
+        return Input.GetKeyDown(KeyCode.R);
+    }
 }
 
 

@@ -12,8 +12,8 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
-  - 
+  - Obstacle
+  - Shell
   - 
   - 
   - 
@@ -44,18 +44,27 @@ TagManager:
   - name: Background
     uniqueID: 853143351
     locked: 0
+  - name: Bullet
+    uniqueID: 718596153
+    locked: 0
   - name: Player
     uniqueID: 1521861035
-    locked: 0
-  - name: Enemy
-    uniqueID: 285382819
     locked: 0
   - name: Obstacle
     uniqueID: 1278459673
     locked: 0
+  - name: Enemy
+    uniqueID: 285382819
+    locked: 0
   - name: Gun
     uniqueID: 937056745
     locked: 0
-  - name: Bullet
-    uniqueID: 718596153
+  - name: ParticleEffects
+    uniqueID: 3254554211
+    locked: 0
+  - name: MuzzleFlash
+    uniqueID: 2734129247
+    locked: 0
+  - name: CrossHair
+    uniqueID: 4276271471
     locked: 0

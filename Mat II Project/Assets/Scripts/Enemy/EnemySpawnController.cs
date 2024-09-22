@@ -23,26 +23,35 @@ public class EnemySpawnController : MonoBehaviour
 
     private void UpdateSpawnerPosition(Vector3 newPlayerPosition)
     {
-        enemySpawnModel.PlayerPosition = newPlayerPosition;
+        enemySpawnModel.SpawnerPosition = newPlayerPosition;
     }
 
 
     private void Start()
     {
+        enemySpawnModel.CanSpawnEnemies = true;
         enemySpawnModel.EnemySpawnCoroutine = StartCoroutine(SpawnEnemies());
     }
 
 
     private IEnumerator SpawnEnemies()
     {
-        while (true)
+        while (enemySpawnModel.CanSpawnEnemies)
         {
             Vector2 spawnPosition = GetRandomPointOnEllipse();
 
-            GameObject thisEnemy = Instantiate(enemySpawnModel.Enemy, spawnPosition, Quaternion.identity);
+            int randomEnemy = Random.Range(0, enemySpawnModel.EnemyPrefabs.Length);
+
+            GameObject thisEnemy = Instantiate(enemySpawnModel.EnemyPrefabs[randomEnemy],
+                                               spawnPosition,
+                                               Quaternion.identity);
+
+
+            //GameObject thisEnemy = Instantiate(enemySpawnModel.Enemy, spawnPosition, Quaternion.identity);
+
 
             enemySpawnModel.Enemies.Add(thisEnemy);
-            
+
             enemySpawnModel.EnemySpawnInterval = Mathf.Clamp(
                                     enemySpawnModel.EnemySpawnInterval - enemySpawnModel.DecreaseSpawnIntervalBy,
                                     enemySpawnModel.MinEnemySpawnInterval,
@@ -57,8 +66,8 @@ public class EnemySpawnController : MonoBehaviour
     {
         float angle = Random.Range(0, 2f * Mathf.PI);
 
-        float x = enemySpawnModel.PlayerPosition.x + enemySpawnModel.EllipseRadiusX * Mathf.Cos(angle);
-        float y = enemySpawnModel.PlayerPosition.y + enemySpawnModel.EllipseRadiusY * Mathf.Sin(angle);
+        float x = enemySpawnModel.SpawnerPosition.x + enemySpawnModel.EllipseRadiusX * Mathf.Cos(angle);
+        float y = enemySpawnModel.SpawnerPosition.y + enemySpawnModel.EllipseRadiusY * Mathf.Sin(angle);
 
         return new Vector2(x, y);
     }
@@ -94,6 +103,7 @@ public class EnemySpawnController : MonoBehaviour
     {
         if(enemySpawnModel.EnemySpawnCoroutine != null)
         {
+            enemySpawnModel.CanSpawnEnemies = false;
             StopCoroutine(enemySpawnModel.EnemySpawnCoroutine);
             enemySpawnModel.EnemySpawnCoroutine = null;
 

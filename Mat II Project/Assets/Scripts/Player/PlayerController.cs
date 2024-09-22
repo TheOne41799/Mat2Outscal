@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         EquipGun();
         StartCoroutine(BroadcastPlayerPositionCoroutine());
         playerModel.InitialLightRadius = playerModel.PlayerLight.pointLightOuterRadius;
+        playerModel.OriginalColor = playerModel.PlayerSpriteRenderer.color;
     }
 
 
@@ -22,6 +23,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         HandlePlayerRotation();
         HandlePlayerShooting();
         HandleEnemyDetection();
+        HandleGunSwitching();
+        HandleReloading();
     }
 
 
@@ -43,6 +46,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void HandlePlayerRotation()
     {
         Vector3 mousePosition = InputManager.Instance.GetMousePosition();
+
         Vector3 direction = (mousePosition - transform.position).normalized;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -53,9 +57,61 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void HandlePlayerShooting()
     {
-        if (playerModel.EquippedGunController != null && InputManager.Instance.IsLeftMouseButtonPressed())
+        if (playerModel.EquippedGunController != null)
         {
-            playerModel.EquippedGunController.Shoot();
+            if (InputManager.Instance.IsLeftMouseButtonDown())
+            {
+                switch (playerModel.EquippedGunController.GetCurrentFireMode())
+                {
+                    case FireMode.Single:
+                        playerModel.EquippedGunController.HandleSingleShot();
+                        break;
+                    case FireMode.Burst:
+                        playerModel.EquippedGunController.HandleBurstFire();
+                        break;
+                }
+            }
+
+
+            if (InputManager.Instance.IsLeftMouseButtonPressed())
+            {
+                if (playerModel.EquippedGunController.GetCurrentFireMode() == FireMode.Auto)
+                {
+                    playerModel.EquippedGunController.HandleAutoFire();
+                }
+            }
+        }
+    }
+
+
+    private void HandleGunSwitching()
+    {
+        if (playerModel.EquippedGunController != null)
+        {
+            if (InputManager.Instance.IsRightMouseButtonDown())
+            {
+                switch(playerModel.EquippedGunController.GetCurrentFireMode())
+                {
+                    case FireMode.Single:
+                        playerModel.EquippedGunController.SetCurrentFireMode(FireMode.Burst);
+                        break;
+                    case FireMode.Burst:
+                        playerModel.EquippedGunController.SetCurrentFireMode(FireMode.Auto);
+                        break;
+                    case FireMode.Auto:
+                        playerModel.EquippedGunController.SetCurrentFireMode(FireMode.Single);
+                        break;
+                }
+            }
+        }
+    }
+
+
+    private void HandleReloading()
+    {
+        if(InputManager.Instance.IsRkeyPressed())
+        {
+            playerModel.EquippedGunController.ManualReload();
         }
     }
 
@@ -69,6 +125,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         gunObject.transform.parent = playerModel.GunHold;
 
         playerModel.EquippedGunController = gunObject.GetComponent<GunController>();
+        playerModel.EquippedGunController.SetCurrentFireMode(FireMode.Single);
     }
 
 
@@ -93,10 +150,20 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void UpdatePlayerHealth()
     {
+        if(playerModel.UpdatePlayerSpriteColorCoroutine != null)
+        {
+            StopCoroutine(playerModel.UpdatePlayerSpriteColorCoroutine);
+        }
+
+        playerModel.UpdatePlayerSpriteColorCoroutine = StartCoroutine(playerView.UpdatePlayerSpriteColor());
+
         if (playerModel.PlayerHealth <= 0)
         {
             KeyGameEvents.BroadcastPlayerDeath();
-            playerView.DestroyPlayer();            
+
+            playerView.SpawnHitParticle();
+
+            playerView.DestroyPlayer();
         }
     }
 

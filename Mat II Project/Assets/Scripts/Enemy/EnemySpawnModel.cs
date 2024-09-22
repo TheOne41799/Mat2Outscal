@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class EnemySpawnModel : MonoBehaviour
 {
-    [SerializeField] private GameObject enemy;
-    public GameObject Enemy { get => enemy; }
+    /*[SerializeField] private GameObject enemy;
+    public GameObject Enemy { get => enemy; }*/
+
+    [SerializeField] private GameObject[] enemyPrefabs;
+    public GameObject[] EnemyPrefabs { get => enemyPrefabs; }
+
+
 
 
     private List<GameObject> enemies = new List<GameObject>();
@@ -16,8 +21,8 @@ public class EnemySpawnModel : MonoBehaviour
     public float WaitTimeToKillLeftOverEnemies {  get => waitTimeToKillLeftOverEnemies; }
 
 
-    private Vector3 playerPosition;
-    public Vector3 PlayerPosition { get => playerPosition; set => playerPosition = value; }
+    private Vector3 spawnerPosition;
+    public Vector3 SpawnerPosition { get => spawnerPosition; set => spawnerPosition = value; }
 
 
     [SerializeField] private float ellipseRadiusX = 10f;
@@ -32,7 +37,7 @@ public class EnemySpawnModel : MonoBehaviour
     public float EnemySpawnInterval { get => enemySpawnInterval; set => enemySpawnInterval = value; }
 
 
-    [SerializeField] private float minEnemySpawnInterval = 0.5f;
+    [SerializeField] private float minEnemySpawnInterval = 1f;
     public float MinEnemySpawnInterval { get => minEnemySpawnInterval; }
 
 
@@ -46,6 +51,10 @@ public class EnemySpawnModel : MonoBehaviour
 
     private Coroutine enemySpawnCoroutine;
     public Coroutine EnemySpawnCoroutine { get => enemySpawnCoroutine; set => enemySpawnCoroutine = value; }
+
+
+    private bool canSpawnEnemies = true;
+    public bool CanSpawnEnemies { get => canSpawnEnemies; set => canSpawnEnemies = value;}
 }
 
 
