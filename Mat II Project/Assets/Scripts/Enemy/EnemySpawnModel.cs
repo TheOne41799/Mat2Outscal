@@ -32,7 +32,7 @@ public class EnemySpawnModel : MonoBehaviour
     public float EnemySpawnInterval { get => enemySpawnInterval; set => enemySpawnInterval = value; }
 
 
-    [SerializeField] private float minEnemySpawnInterval = 0.5f;
+    [SerializeField] private float minEnemySpawnInterval = 1f;
     public float MinEnemySpawnInterval { get => minEnemySpawnInterval; }
 
 

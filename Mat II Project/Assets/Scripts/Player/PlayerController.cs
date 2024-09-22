@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void HandlePlayerRotation()
     {
         Vector3 mousePosition = InputManager.Instance.GetMousePosition();
+
         Vector3 direction = (mousePosition - transform.position).normalized;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

@@ -8,6 +8,23 @@ public class GunController : MonoBehaviour
     [SerializeField] private GunModel gunModel;
     [SerializeField] private GunView gunView;
 
+    private Vector3 recoilSmoothing;
+
+
+    private void Start()
+    {
+        gunModel.InitialPosition = transform.localPosition;
+    }
+
+
+    private void Update()
+    {
+        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, 
+                                                     gunModel.InitialPosition,
+                                                     ref recoilSmoothing, 
+                                                     gunModel.RecoilRecoverySpeed);
+    }
+
 
     public FireMode GetCurrentFireMode()
     {
@@ -64,6 +81,16 @@ public class GunController : MonoBehaviour
             ExecuteShoot();
             gunModel.NextFireTime = Time.time + gunModel.FireRate;
         }
+
+        ApplyRecoil();
+    }
+
+
+    private void ApplyRecoil()
+    {
+        gunModel.TargetRecoilPosition = gunModel.InitialPosition - Vector3.right * gunModel.RecoilAmount;
+
+        transform.localPosition = gunModel.TargetRecoilPosition;
     }
 
 

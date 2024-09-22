@@ -95,6 +95,22 @@ public class GunModel : MonoBehaviour
 
     [SerializeField] private float muzzleFlashTime = 0.05f;
     public float MuzzleFlashTime { get => muzzleFlashTime; }
+
+
+    private Vector3 initialPosition;
+    public Vector3 InitialPosition { get => initialPosition; set => initialPosition = value; }
+
+
+    private Vector3 targetRecoilPosition;
+    public Vector3 TargetRecoilPosition { get => targetRecoilPosition; set => targetRecoilPosition = value; }
+
+
+    [SerializeField] private float recoilAmount = 0.1f;
+    public float RecoilAmount { get => recoilAmount; set => recoilAmount = value; }
+
+
+    [SerializeField] private float recoilRecoverySpeed = 0.1f;
+    public float RecoilRecoverySpeed { get => recoilRecoverySpeed; set => recoilRecoverySpeed = value;}
 }
 
 

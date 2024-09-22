@@ -65,3 +65,6 @@ TagManager:
   - name: MuzzleFlash
     uniqueID: 2734129247
     locked: 0
+  - name: CrossHair
+    uniqueID: 4276271471
+    locked: 0
