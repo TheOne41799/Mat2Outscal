@@ -14,11 +14,15 @@ public class GunController : MonoBehaviour
     private void Start()
     {
         gunModel.InitialPosition = transform.localPosition;
+
+        gunModel.CurrentAmmo = gunModel.MagazineSize;
     }
 
 
     private void Update()
     {
+        AutoReload();
+
         transform.localPosition = Vector3.SmoothDamp(transform.localPosition, 
                                                      gunModel.InitialPosition,
                                                      ref recoilSmoothing, 
@@ -73,13 +77,59 @@ public class GunController : MonoBehaviour
     }
 
 
+    public void ManualReload()
+    {
+        if (gunModel.CurrentAmmo < gunModel.MagazineSize && !gunModel.IsReloading)
+        {
+            StartCoroutine(Reload());
+        }
+    }
+
+
+    private void AutoReload()
+    {
+        if (gunModel.CurrentAmmo == 0)
+        {
+            if (!gunModel.IsReloading)
+            {
+                StartCoroutine(Reload());
+            }
+        }
+    }
+
+
+    private IEnumerator Reload()
+    {
+        gunModel.IsReloading = true;
+
+        Debug.Log("relaoding start");
+
+        yield return new WaitForSeconds(gunModel.ReloadTime);
+
+        int ammoToReload = Mathf.Min(gunModel.MaxAmmo, gunModel.MagazineSize - gunModel.CurrentAmmo);
+        gunModel.CurrentAmmo += ammoToReload;
+        gunModel.MaxAmmo -= ammoToReload;
+
+        Debug.Log("reload ompLeete");
+
+        gunModel.IsReloading = false;
+    }
+
+
     private void Shoot()
     {
-        if (Time.time >= gunModel.NextFireTime)
+        if (gunModel.IsReloading) return;
+
+        if (gunModel.CurrentAmmo > 0 && Time.time >= gunModel.NextFireTime)
         {
             InstantiateBullet();
             ExecuteShoot();
+            gunModel.CurrentAmmo--;
             gunModel.NextFireTime = Time.time + gunModel.FireRate;
+        }
+        else if (gunModel.CurrentAmmo <= 0)
+        {
+            Debug.Log("ammo over. relod");
         }
 
         ApplyRecoil();
@@ -96,16 +146,42 @@ public class GunController : MonoBehaviour
 
     private void InstantiateBullet()
     {
-        GameObject bulletObject = Instantiate(gunModel.BulletPrefab,
+        /*GameObject bulletObject = Instantiate(gunModel.BulletPrefab,
+                                              gunModel.Muzzle.position,
+                                              gunModel.Muzzle.rotation);*/
+
+        GameObject bulletObject = null;
+
+
+        switch (gunModel.CurrentFireMode)
+        {
+            case FireMode.Single:
+                bulletObject = Instantiate(gunModel.BulletPrefab[0],
                                               gunModel.Muzzle.position,
                                               gunModel.Muzzle.rotation);
+                break;
+            case FireMode.Burst:
+                bulletObject = Instantiate(gunModel.BulletPrefab[1],
+                                              gunModel.Muzzle.position,
+                                              gunModel.Muzzle.rotation);
+                break;
+            case FireMode.Auto:
+                bulletObject = Instantiate(gunModel.BulletPrefab[2],
+                                              gunModel.Muzzle.position,
+                                              gunModel.Muzzle.rotation);
+                break;
+        }
 
-        gunModel.BulletController = bulletObject.GetComponent<BulletController>();
-        gunModel.BulletDirection = gunModel.Muzzle.right;
 
-        int destroyTime = gunModel.BulletController.GetBulletDestroyTime();
+        if (bulletObject != null)
+        {
+            gunModel.BulletController = bulletObject.GetComponent<BulletController>();
+            gunModel.BulletDirection = gunModel.Muzzle.right;
 
-        Destroy(bulletObject, destroyTime);
+            int destroyTime = gunModel.BulletController.GetBulletDestroyTime();
+
+            Destroy(bulletObject, destroyTime);
+        }
     }
 
 

@@ -1106,7 +1106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5576360437740285177, guid: 08bd8b24e39d15d4e9548ce34e6ff12d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.96
+      value: 14.99
       objectReference: {fileID: 0}
     - target: {fileID: 5576360437740285177, guid: 08bd8b24e39d15d4e9548ce34e6ff12d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3391,7 +3391,7 @@ GameObject:
   - component: {fileID: 1360062210}
   - component: {fileID: 1360062211}
   m_Layer: 0
-  m_Name: CroosHair
+  m_Name: CrossHair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4474,10 +4474,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1022782113, guid: 6fafc82ff362eaa4f84bb641e2e0ca4c, type: 3}
-      propertyPath: crossHair
-      value: 
-      objectReference: {fileID: 1360062210}
     - target: {fileID: 261979263915013130, guid: 6fafc82ff362eaa4f84bb641e2e0ca4c, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -4525,10 +4521,6 @@ PrefabInstance:
     - target: {fileID: 261979263915013133, guid: 6fafc82ff362eaa4f84bb641e2e0ca4c, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 261979263915013133, guid: 6fafc82ff362eaa4f84bb641e2e0ca4c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fafc82ff362eaa4f84bb641e2e0ca4c, type: 3}
@@ -4817,9 +4809,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4185057825955369812, guid: 77f2d270ca03fc0468579bfb8767441b, type: 3}
-      propertyPath: decreaseSpawnIntervalBy
-      value: 0.1
+      propertyPath: enemyPrefabs.Array.size
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4185057825955369812, guid: 77f2d270ca03fc0468579bfb8767441b, type: 3}
+      propertyPath: enemyPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 7187435926494165293, guid: a71ed5a1f9b5e994ba48714ce2dc1af2, type: 3}
+    - target: {fileID: 4185057825955369812, guid: 77f2d270ca03fc0468579bfb8767441b, type: 3}
+      propertyPath: enemyPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 7187435926494165293, guid: 23552322a36598e438163abdf04a0fc4, type: 3}
+    - target: {fileID: 4185057825955369812, guid: 77f2d270ca03fc0468579bfb8767441b, type: 3}
+      propertyPath: enemyPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 7187435926494165293, guid: a43cdb31bcda4064e9e843a6206b1e0e, type: 3}
     - target: {fileID: 4185057825955369813, guid: 77f2d270ca03fc0468579bfb8767441b, type: 3}
       propertyPath: m_Name
       value: SpawnManager

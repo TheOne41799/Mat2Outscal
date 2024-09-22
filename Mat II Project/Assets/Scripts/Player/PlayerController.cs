@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         HandlePlayerShooting();
         HandleEnemyDetection();
         HandleGunSwitching();
+        HandleReloading();
     }
 
 
@@ -102,6 +103,15 @@ public class PlayerController : MonoBehaviour, IDamageable
                         break;
                 }
             }
+        }
+    }
+
+
+    private void HandleReloading()
+    {
+        if(InputManager.Instance.IsRkeyPressed())
+        {
+            playerModel.EquippedGunController.ManualReload();
         }
     }
 

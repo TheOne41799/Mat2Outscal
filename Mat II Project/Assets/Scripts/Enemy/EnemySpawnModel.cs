@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class EnemySpawnModel : MonoBehaviour
 {
-    [SerializeField] private GameObject enemy;
-    public GameObject Enemy { get => enemy; }
+    /*[SerializeField] private GameObject enemy;
+    public GameObject Enemy { get => enemy; }*/
+
+    [SerializeField] private GameObject[] enemyPrefabs;
+    public GameObject[] EnemyPrefabs { get => enemyPrefabs; }
+
+
 
 
     private List<GameObject> enemies = new List<GameObject>();

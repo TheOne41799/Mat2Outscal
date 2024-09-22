@@ -40,10 +40,18 @@ public class EnemySpawnController : MonoBehaviour
         {
             Vector2 spawnPosition = GetRandomPointOnEllipse();
 
-            GameObject thisEnemy = Instantiate(enemySpawnModel.Enemy, spawnPosition, Quaternion.identity);
+            int randomEnemy = Random.Range(0, enemySpawnModel.EnemyPrefabs.Length);
+
+            GameObject thisEnemy = Instantiate(enemySpawnModel.EnemyPrefabs[randomEnemy],
+                                               spawnPosition,
+                                               Quaternion.identity);
+
+
+            //GameObject thisEnemy = Instantiate(enemySpawnModel.Enemy, spawnPosition, Quaternion.identity);
+
 
             enemySpawnModel.Enemies.Add(thisEnemy);
-            
+
             enemySpawnModel.EnemySpawnInterval = Mathf.Clamp(
                                     enemySpawnModel.EnemySpawnInterval - enemySpawnModel.DecreaseSpawnIntervalBy,
                                     enemySpawnModel.MinEnemySpawnInterval,

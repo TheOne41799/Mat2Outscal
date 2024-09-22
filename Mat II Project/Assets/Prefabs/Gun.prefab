@@ -724,7 +724,10 @@ MonoBehaviour:
   fireRate: 0.1
   bulletVelocity: 50
   muzzle: {fileID: 1343506423}
-  bulletPrefab: {fileID: 1415822732650240325, guid: 47c5b05cb9afdda49954cac89c7cea4e, type: 3}
+  bulletPrefabs:
+  - {fileID: 1415822732650240325, guid: 47c5b05cb9afdda49954cac89c7cea4e, type: 3}
+  - {fileID: 1415822732650240325, guid: 8830a293ee13d64439102f44f2e6fc40, type: 3}
+  - {fileID: 1415822732650240325, guid: a61df7d8fce04594caaf63022442fbff, type: 3}
   shellPrefab: {fileID: 1828213572294853651, guid: c1ee9a35f1c44dd4893b48413ed1858f, type: 3}
   ejectionPoint: {fileID: 5857014241632733509}
   ejectionForce: 3
@@ -737,6 +740,12 @@ MonoBehaviour:
   muzzleFlashSprites: {fileID: 1795469248}
   muzzleFlashLight: {fileID: 7780715131379917417}
   muzzleFlashTime: 0.05
+  recoilAmount: 0.1
+  recoilRecoverySpeed: 0.1
+  maxAmmo: 120
+  currentAmmo: 0
+  magazineSize: 30
+  reloadTime: 2
 --- !u!114 &5875279805806334980
 MonoBehaviour:
   m_ObjectHideFlags: 0

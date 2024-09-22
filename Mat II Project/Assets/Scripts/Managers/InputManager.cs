@@ -54,6 +54,12 @@ public class InputManager : MonoBehaviour
     {
         return Input.GetMouseButtonDown(1);
     }
+
+
+    public bool IsRkeyPressed()
+    {
+        return Input.GetKeyDown(KeyCode.R);
+    }
 }
 
 

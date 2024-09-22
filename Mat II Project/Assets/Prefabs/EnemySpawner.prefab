@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4185057825955369810
 Transform:
   m_ObjectHideFlags: 0
@@ -65,4 +65,4 @@ MonoBehaviour:
   enemySpawnInterval: 2
   minEnemySpawnInterval: 1
   maxEnemySpawnInterval: 2
-  decreaseSpawnIntervalBy: 0.05
+  decreaseSpawnIntervalBy: 0.1

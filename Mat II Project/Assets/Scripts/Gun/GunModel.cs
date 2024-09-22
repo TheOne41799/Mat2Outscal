@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,8 +42,12 @@ public class GunModel : MonoBehaviour
     public Vector2 BulletDirection { get => bulletDirection; set => bulletDirection = value; }
 
 
-    [SerializeField] private GameObject bulletPrefab;
-    public GameObject BulletPrefab { get => bulletPrefab; }
+    /*[SerializeField] private GameObject bulletPrefab;
+    public GameObject BulletPrefab { get => bulletPrefab; }*/
+
+
+    [SerializeField] private GameObject[] bulletPrefabs;
+    public GameObject[] BulletPrefab { get => bulletPrefabs; }
 
 
     private BulletController bulletController;
@@ -111,6 +116,26 @@ public class GunModel : MonoBehaviour
 
     [SerializeField] private float recoilRecoverySpeed = 0.1f;
     public float RecoilRecoverySpeed { get => recoilRecoverySpeed; set => recoilRecoverySpeed = value;}
+
+
+    [SerializeField] private int maxAmmo = 100;
+    public int MaxAmmo { get => maxAmmo; set => maxAmmo = value; }
+
+
+    [SerializeField] private int currentAmmo;
+    public int CurrentAmmo { get => currentAmmo; set => currentAmmo = value; }
+
+
+    [SerializeField] private int magazineSize = 30;
+    public int MagazineSize { get => magazineSize; set => magazineSize = value; }
+
+
+    [SerializeField] private float reloadTime = 2f;
+    public float ReloadTime { get => reloadTime; set => reloadTime = value; }
+
+
+    private bool isReloading = false;
+    public bool IsReloading { get => isReloading; set => isReloading = value; }
 }
 
 
