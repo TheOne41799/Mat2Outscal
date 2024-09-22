@@ -28,8 +28,6 @@ public class EnemyView : MonoBehaviour
 
     private void OnDestroy()
     {
-        //SpawnHitParticle();
-
 #if UNITY_EDITOR
         if (!EditorApplication.isPlayingOrWillChangePlaymode)
         {

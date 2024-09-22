@@ -9,7 +9,54 @@ public class GunController : MonoBehaviour
     [SerializeField] private GunView gunView;
 
 
-    public void Shoot()
+    public FireMode GetCurrentFireMode()
+    {
+        return gunModel.CurrentFireMode;
+    }
+
+
+    public void SetCurrentFireMode(FireMode mode)
+    {
+        gunModel.CurrentFireMode = mode;
+    }
+
+
+    public void HandleSingleShot()
+    {
+        Shoot();
+    }
+
+
+    public void HandleBurstFire()
+    {
+        if (!gunModel.BurstFireEnabled)
+        {
+            StartCoroutine(HandleBurstFireCoroutine());
+        }
+    }
+
+
+    private IEnumerator HandleBurstFireCoroutine()
+    {
+        gunModel.BurstFireEnabled = true;
+
+        for (int i = 0; i < gunModel.BurstCount; i++)
+        {
+            Shoot();
+            yield return new WaitForSeconds(gunModel.BurstFireRate);
+        }
+
+        gunModel.BurstFireEnabled = false;
+    }
+
+
+    public void HandleAutoFire()
+    {
+        Shoot();
+    }
+
+
+    private void Shoot()
     {
         if (Time.time >= gunModel.NextFireTime)
         {

@@ -717,6 +717,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011e53baa01678b4dbe78d88c7c77bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentFireMode: 1
+  burstCount: 3
+  burstFireRate: 0.1
+  burstFireEnabled: 0
   fireRate: 0.1
   bulletVelocity: 50
   muzzle: {fileID: 1343506423}

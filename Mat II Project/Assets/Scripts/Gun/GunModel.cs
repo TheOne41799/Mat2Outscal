@@ -5,6 +5,22 @@ using UnityEngine;
 
 public class GunModel : MonoBehaviour
 {
+    [SerializeField] private FireMode currentFireMode;
+    public FireMode CurrentFireMode { get => currentFireMode; set => currentFireMode = value; }
+
+
+    [SerializeField] private int burstCount = 3;
+    public int BurstCount { get => burstCount; set => burstCount = value; }
+
+
+    [SerializeField] private float burstFireRate = 0.1f;
+    public float BurstFireRate { get => burstFireRate;  set => burstFireRate = value; }
+
+
+    [SerializeField] private bool burstFireEnabled = false;
+    public bool BurstFireEnabled { get => burstFireEnabled; set => burstFireEnabled = value; }
+
+
     [SerializeField] private float fireRate = 0.1f;
     public float FireRate { get => fireRate; set => fireRate = value; }
 
