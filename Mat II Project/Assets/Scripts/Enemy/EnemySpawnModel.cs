@@ -11,8 +11,6 @@ public class EnemySpawnModel : MonoBehaviour
     public GameObject[] EnemyPrefabs { get => enemyPrefabs; }
 
 
-
-
     private List<GameObject> enemies = new List<GameObject>();
     public List<GameObject> Enemies { get => enemies; set => enemies = value; }
 

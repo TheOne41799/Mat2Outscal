@@ -16,6 +16,8 @@ public class GunController : MonoBehaviour
         gunModel.InitialPosition = transform.localPosition;
 
         gunModel.CurrentAmmo = gunModel.MagazineSize;
+
+        UIController.Instance.UpdateAmmo(gunModel.CurrentAmmo, gunModel.MagazineSize);
     }
 
 
@@ -44,6 +46,7 @@ public class GunController : MonoBehaviour
 
     public void HandleSingleShot()
     {
+        if (!gunModel.IsReloading) SoundManager.Instance.Play(Sounds.GUN_SINGLE);
         Shoot();
     }
 
@@ -63,6 +66,7 @@ public class GunController : MonoBehaviour
 
         for (int i = 0; i < gunModel.BurstCount; i++)
         {
+            if (!gunModel.IsReloading) SoundManager.Instance.Play(Sounds.GUN_BURST);
             Shoot();
             yield return new WaitForSeconds(gunModel.BurstFireRate);
         }
@@ -73,14 +77,33 @@ public class GunController : MonoBehaviour
 
     public void HandleAutoFire()
     {
-        Shoot();
+        if (!gunModel.IsReloading && !gunModel.AutoFireEnabled)
+        {
+            gunModel.AutoFireEnabled = true;
+            StartCoroutine(PlayAutoGunSounds());
+        }
+    }
+
+
+    private IEnumerator PlayAutoGunSounds()
+    {
+        while (gunModel.AutoFireEnabled && gunModel.CurrentAmmo > 0 
+               && InputManager.Instance.IsLeftMouseButtonPressed())
+        {
+            Shoot();
+            if (!gunModel.IsReloading) SoundManager.Instance.Play(Sounds.GUN_AUTO);
+
+            yield return new WaitForSeconds(gunModel.FireRate);
+        }
+
+        gunModel.AutoFireEnabled = false;
     }
 
 
     public void ManualReload()
     {
         if (gunModel.CurrentAmmo < gunModel.MagazineSize && !gunModel.IsReloading)
-        {
+        {            
             StartCoroutine(Reload());
         }
     }
@@ -102,7 +125,9 @@ public class GunController : MonoBehaviour
     {
         gunModel.IsReloading = true;
 
-        Debug.Log("relaoding start");
+        SoundManager.Instance.Play(Sounds.RELOAD);
+
+        UIController.Instance.AmmoReloading();
 
         yield return new WaitForSeconds(gunModel.ReloadTime);
 
@@ -110,7 +135,7 @@ public class GunController : MonoBehaviour
         gunModel.CurrentAmmo += ammoToReload;
         gunModel.MaxAmmo -= ammoToReload;
 
-        Debug.Log("reload ompLeete");
+        UIController.Instance.UpdateAmmo(gunModel.CurrentAmmo, gunModel.MagazineSize);
 
         gunModel.IsReloading = false;
     }
@@ -125,11 +150,10 @@ public class GunController : MonoBehaviour
             InstantiateBullet();
             ExecuteShoot();
             gunModel.CurrentAmmo--;
+
+            UIController.Instance.UpdateAmmo(gunModel.CurrentAmmo, gunModel.MagazineSize);
+
             gunModel.NextFireTime = Time.time + gunModel.FireRate;
-        }
-        else if (gunModel.CurrentAmmo <= 0)
-        {
-            Debug.Log("ammo over. relod");
         }
 
         ApplyRecoil();

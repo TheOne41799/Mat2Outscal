@@ -84,7 +84,15 @@ public class EnemyController : MonoBehaviour, IDamageable
         {
             enemyView.SpawnHitParticle();
 
+            SoundManager.Instance.Play(Sounds.ENEMY_KILLED);
+
+            KeyGameEvents.BroadcastEnemyDeath(1);
+
             enemyView.DestroyEnemy();
+        }
+        else
+        {
+            SoundManager.Instance.Play(Sounds.ENEMY_HIT);
         }
     }
 }

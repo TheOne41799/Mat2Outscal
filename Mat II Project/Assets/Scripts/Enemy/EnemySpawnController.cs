@@ -101,18 +101,26 @@ public class EnemySpawnController : MonoBehaviour
 
     private void HandlePlayerDeath()
     {
-        if(enemySpawnModel.EnemySpawnCoroutine != null)
+        if (enemySpawnModel.EnemySpawnCoroutine != null)
         {
             enemySpawnModel.CanSpawnEnemies = false;
             StopCoroutine(enemySpawnModel.EnemySpawnCoroutine);
             enemySpawnModel.EnemySpawnCoroutine = null;
 
-            DestroyEnemies();
+            StartCoroutine(WaitForEndofScene());
         }
     }
 
 
-    private void DestroyEnemies()
+    private IEnumerator WaitForEndofScene()
+    {
+        yield return StartCoroutine(DestroyEnemies());
+
+        GameManager.Instance.SetGameState(GameState.RESTART_MENU);
+    }
+
+
+    private IEnumerator DestroyEnemies()
     {
         foreach (var enemy in enemySpawnModel.Enemies)
         {
@@ -123,6 +131,8 @@ public class EnemySpawnController : MonoBehaviour
         }
 
         enemySpawnModel.Enemies.Clear();
+
+        yield return new WaitForSeconds(5);
     }
 }
 

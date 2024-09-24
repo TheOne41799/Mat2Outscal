@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
@@ -19,6 +20,19 @@ public class InputManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameManager.Instance.CurrentGameState == GameState.HUD)
+            {
+                SoundManager.Instance.Play(Sounds.PAUSE);
+                GameManager.Instance.SetGameState(GameState.PAUSE_MENU);
+            }
         }
     }
 

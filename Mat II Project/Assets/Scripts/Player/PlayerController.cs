@@ -2,11 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SocialPlatforms.Impl;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
     [SerializeField] private PlayerModel playerModel;
     [SerializeField] private PlayerView playerView;
+
+
+    private void OnEnable()
+    {
+        KeyGameEvents.OnEnemyDeath += UpdateScore;
+    }
+
+    private void OnDisable()
+    {
+        KeyGameEvents.OnEnemyDeath -= UpdateScore;
+    }
 
 
     private void Start()
@@ -15,11 +28,20 @@ public class PlayerController : MonoBehaviour, IDamageable
         StartCoroutine(BroadcastPlayerPositionCoroutine());
         playerModel.InitialLightRadius = playerModel.PlayerLight.pointLightOuterRadius;
         playerModel.OriginalColor = playerModel.PlayerSpriteRenderer.color;
+
+        playerModel.Score = 0;
+        GameManager.Instance.Score = playerModel.Score;
+        playerModel.HighScore = GameManager.Instance.HighScore;
+        GameManager.Instance.UpdateScore();
+        UIController.Instance.DisplayCurrentFireModeInHUD((int)FireMode.Single);
+        UIController.Instance.UpdatePlayerHealth(playerModel.PlayerHealth);
     }
 
 
     private void Update()
     {
+        if (GameManager.Instance.CurrentGameState != GameState.HUD) return;
+
         HandlePlayerRotation();
         HandlePlayerShooting();
         HandleEnemyDetection();
@@ -94,12 +116,15 @@ public class PlayerController : MonoBehaviour, IDamageable
                 {
                     case FireMode.Single:
                         playerModel.EquippedGunController.SetCurrentFireMode(FireMode.Burst);
+                        UIController.Instance.DisplayCurrentFireModeInHUD((int) FireMode.Burst);
                         break;
                     case FireMode.Burst:
                         playerModel.EquippedGunController.SetCurrentFireMode(FireMode.Auto);
+                        UIController.Instance.DisplayCurrentFireModeInHUD((int)FireMode.Auto);
                         break;
                     case FireMode.Auto:
                         playerModel.EquippedGunController.SetCurrentFireMode(FireMode.Single);
+                        UIController.Instance.DisplayCurrentFireModeInHUD((int)FireMode.Single);
                         break;
                 }
             }
@@ -144,6 +169,9 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         playerModel.PlayerHealth -= damage;
 
+        if(playerModel.PlayerHealth < 0)  playerModel.PlayerHealth = 0;
+        UIController.Instance.UpdatePlayerHealth(playerModel.PlayerHealth);
+
         UpdatePlayerHealth();
     }
 
@@ -161,9 +189,15 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             KeyGameEvents.BroadcastPlayerDeath();
 
+            SoundManager.Instance.Play(Sounds.PLAYER_KILLED);
+
             playerView.SpawnHitParticle();
 
             playerView.DestroyPlayer();
+        }
+        else
+        {
+            SoundManager.Instance.Play(Sounds.PLAYER_HIT);
         }
     }
 
@@ -175,6 +209,28 @@ public class PlayerController : MonoBehaviour, IDamageable
                                                                   playerModel.EnemyLayerMask);
 
         playerView.UpdateLightRadius(enemiesInRadius.Length);
+    }
+
+
+    private void UpdateScore(int scoreAmount)
+    {
+        playerModel.Score += scoreAmount;
+
+        GameManager.Instance.Score = playerModel.Score;
+
+        UpdateHighScore();
+
+        GameManager.Instance.UpdateScore();
+    }
+
+
+    private void UpdateHighScore()
+    {
+        if (playerModel.Score > playerModel.HighScore)
+        {
+            playerModel.HighScore = playerModel.Score;
+            GameManager.Instance.HighScore = playerModel.HighScore;
+        }
     }
 }
 
