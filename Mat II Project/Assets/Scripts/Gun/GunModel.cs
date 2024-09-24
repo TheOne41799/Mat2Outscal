@@ -18,8 +18,12 @@ public class GunModel : MonoBehaviour
     public float BurstFireRate { get => burstFireRate;  set => burstFireRate = value; }
 
 
-    [SerializeField] private bool burstFireEnabled = false;
+    private bool burstFireEnabled = false;
     public bool BurstFireEnabled { get => burstFireEnabled; set => burstFireEnabled = value; }
+
+
+    private bool autoFireEnabled = false;
+    public bool AutoFireEnabled { get => autoFireEnabled; set => autoFireEnabled = value; }
 
 
     [SerializeField] private float fireRate = 0.1f;
@@ -118,7 +122,7 @@ public class GunModel : MonoBehaviour
     public float RecoilRecoverySpeed { get => recoilRecoverySpeed; set => recoilRecoverySpeed = value;}
 
 
-    [SerializeField] private int maxAmmo = 100;
+    [SerializeField] private int maxAmmo = 12000;
     public int MaxAmmo { get => maxAmmo; set => maxAmmo = value; }
 
 
@@ -130,7 +134,7 @@ public class GunModel : MonoBehaviour
     public int MagazineSize { get => magazineSize; set => magazineSize = value; }
 
 
-    [SerializeField] private float reloadTime = 2f;
+    [SerializeField] private float reloadTime = 0.15f;
     public float ReloadTime { get => reloadTime; set => reloadTime = value; }
 
 

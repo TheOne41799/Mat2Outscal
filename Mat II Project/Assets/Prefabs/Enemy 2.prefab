@@ -520,7 +520,7 @@ MonoBehaviour:
   enemyRB: {fileID: 7187435926494165286}
   rotationSpeed: 10
   enemyHealth: 6
-  dealDamage: 1
+  dealDamage: 2
   enemySpriteRenderer: {fileID: 7187435924453191681}
   enemyStunnedTime: 0.1
   deathParticleEffect: {fileID: 1015499579574242664, guid: 1ec4e20c76096af48ba385b88b30d076, type: 3}

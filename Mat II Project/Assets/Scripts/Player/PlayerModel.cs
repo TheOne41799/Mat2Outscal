@@ -32,7 +32,7 @@ public class PlayerModel : MonoBehaviour
     public float PositionUpdateInterval { get => positionUpdateInterval;}
 
 
-    [SerializeField] private int playerHealth = 10;
+    [SerializeField] private int playerHealth = 15;
     public int PlayerHealth { get => playerHealth; set => playerHealth = value; }
 
 
@@ -80,6 +80,14 @@ public class PlayerModel : MonoBehaviour
     public Coroutine UpdatePlayerSpriteColorCoroutine { 
                         get => updatePlayerSpriteColorCoroutine;
                         set => updatePlayerSpriteColorCoroutine = value;}
+
+
+    private int score;
+    public int Score { get => score; set => score = value; }
+
+
+    private int highScore;
+    public int HighScore { get => highScore; set => highScore = value; }
 }
 
 

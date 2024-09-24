@@ -36,6 +36,8 @@ public class PlayerView : MonoBehaviour
             {
                 KeyGameEvents.BroadcastPlayerDeath();
 
+                SoundManager.Instance.Play(Sounds.PLAYER_KILLED);
+
                 SpawnHitParticle();
 
                 DestroyPlayer();
@@ -49,6 +51,8 @@ public class PlayerView : MonoBehaviour
             playerModel.PlayerLight.pointLightOuterRadius = Mathf.Min(playerModel.PlayerLight.pointLightOuterRadius,
                                                                       playerModel.InitialLightRadius);
         }
+
+        KeyGameEvents.BroadcastDIMValue(playerModel.PlayerLight.pointLightOuterRadius);
     }
 
 

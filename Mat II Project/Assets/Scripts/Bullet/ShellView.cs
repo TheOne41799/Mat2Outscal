@@ -41,7 +41,6 @@ public class ShellView : MonoBehaviour
     }
 
 
-
     private IEnumerator FadeShellsCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);

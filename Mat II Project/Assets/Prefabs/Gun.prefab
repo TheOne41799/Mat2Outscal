@@ -720,7 +720,6 @@ MonoBehaviour:
   currentFireMode: 1
   burstCount: 3
   burstFireRate: 0.1
-  burstFireEnabled: 0
   fireRate: 0.1
   bulletVelocity: 50
   muzzle: {fileID: 1343506423}
@@ -745,7 +744,7 @@ MonoBehaviour:
   maxAmmo: 12000
   currentAmmo: 0
   magazineSize: 30
-  reloadTime: 2
+  reloadTime: 1.5
 --- !u!114 &5875279805806334980
 MonoBehaviour:
   m_ObjectHideFlags: 0

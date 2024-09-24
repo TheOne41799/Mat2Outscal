@@ -334,7 +334,7 @@ MonoBehaviour:
   gunHold: {fileID: 1405400982}
   playerRB: {fileID: 261979263915013128}
   positionUpdateInterval: 0.25
-  playerHealth: 10
+  playerHealth: 15
   playerLight: {fileID: 1929822881}
   initialLightRadius: 0
   criticalLightRadius: 1.5
